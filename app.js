@@ -1,5 +1,4 @@
 const path = require('path');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -15,6 +14,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.listen(PORT || 3000, () => console.log(`🚀 Server running on port ${PORT}`));
 
 app.get('/', (req, res) => {
+    console.log('hit on /');
     res.render('index');
 });
 
