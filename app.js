@@ -27,7 +27,7 @@ app.get('/thrivecart', (req, res) => {
 
 app.post('/thrivecart', (req, res) => {
     console.log(`***** Start POST at /thrivecart *****`);
-    console.log(`${req.body}`);
+    console.log(req.body);
     console.log(`***** End POST at /thrivecart *****`);
     res.status(204).send('hola');
 });
