@@ -31,3 +31,10 @@ app.post('/thrivecart', (req, res) => {
     console.log(`***** End POST at /thrivecart *****`);
     res.status(204).send('hola');
 });
+
+app.post('/teachable', (req, res) => {
+    console.log(`***** Start POST at /teachable *****`);
+    console.log(req.body);
+    console.log(`***** End POST at /teachable *****`);
+    res.status(204).send('hola');
+})
