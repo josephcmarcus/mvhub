@@ -1,6 +1,7 @@
 const dotenv = require('dotenv').config();
 const mysql = require('mysql2');
 const fs = require('fs');
+const res = require('express/lib/response');
 
 const pool  = mysql.createPool({
     connectionLimit : 10,
@@ -20,11 +21,17 @@ module.exports.testConnection = function(numOne, numTwo) {
     const sql = `SELECT ${numOne} + ${numTwo} AS solution`;
     // get connection from pool
     pool.getConnection(function(err, connection) {
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            return;
+        };
         // make query
         connection.query(sql, function(err, results) {
             connection.release();
-            if (err) throw err;
+            if (err) {
+                console.log(err);
+                return;
+            }
             console.log(results.length);
             console.log('The solution is: ', results[0].solution);
         });
@@ -35,11 +42,17 @@ module.exports.write = function(table, columns, values) {
     const sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`
     // get connection from pool
     pool.getConnection(function(err, connection) {
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            return;
+        }
         // make query
         connection.query(sql, function(err, results) {
             connection.release();
-            if (err) throw err;
+            if (err) {
+                console.log(err);
+                return;
+            }
             console.log(results);
         });
     });

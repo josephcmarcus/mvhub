@@ -2,34 +2,28 @@ const database = require('../database');
 const dotenv = require('dotenv').config();
 
 module.exports.test = (req, res) => {
-    database.testConnection(2, 2, function(err, results) {
+    database.testConnection('seven', 5, function(err, results) {
         if (err) { 
             res.send(500, 'Server Error'); 
             return;
         }
-        res.send(results);
-    });
+    }); 
+    res.status(200).send('success');
 };
 
 module.exports.index = (req, res) => {
-    console.log(`***** Start GET at /teachable *****`);
-    console.log(req.body);
-    console.log(`***** End GET at /teachable *****`);
-    res.status(204, 'Success');
+    console.log(`hit on /teachable`);
+    res.status(200, 'Success');
 };
 
 module.exports.sale = (req, res) => {
-    console.log(`***** Start GET at /teachable/sale *****`);
-    console.log(req.body);
-    console.log(`***** End GET at /teachable/sale *****`);
-    res.status(204, 'Success');
+    console.log('hit on /teachable/sale');
+    res.status(200, 'Success');
 };
 
 module.exports.join = (req, res) => {
-    console.log(`***** Start GET at /teachable/join *****`);
-    console.log(req.body);
-    console.log(`***** End GET at /teachable/join *****`);
-    res.status(204, 'Success');
+    console.log('hit on /teachable/join');
+    res.status(200, 'Success');
 };
 
 // processes a course sale webhook
@@ -49,7 +43,7 @@ module.exports.processSaleHook = (req, res) => {
         }
         res.send(results);
     });
-    res.status(204).send('Thank you');
+    res.status(200).send('Success');
 };
 
 // processes a platform join webhook
