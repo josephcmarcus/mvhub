@@ -13,17 +13,17 @@ module.exports.test = (req, res) => {
 
 module.exports.index = (req, res) => {
     console.log(`hit on /teachable`);
-    res.status(200, 'Success');
+    res.status(200).send('Success');
 };
 
 module.exports.sale = (req, res) => {
     console.log('hit on /teachable/sale');
-    res.status(200, 'Success');
+    res.status(200).send('Success');
 };
 
 module.exports.join = (req, res) => {
     console.log('hit on /teachable/join');
-    res.status(200, 'Success');
+    res.status(200).send('Success');
 };
 
 // processes a course sale webhook
