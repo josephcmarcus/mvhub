@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const rootRoutes = require('./routes/root');
 const teachableRoutes = require('./routes/teachable');
@@ -12,7 +11,7 @@ const PORT = process.env.PORT;
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use('/teachable', teachableRoutes);
