@@ -31,11 +31,13 @@ module.exports.processSaleHook = (req, res) => {
     console.log(`***** Start POST at /teachable/sale *****`);
     console.log(req.body);
     console.log(`***** End POST at /teachable/sale *****`);
-    const { type: event_type, object: { user: { name: username, email, id: userid}, 
-        course: { name: coursename }, price } } = req.body;
+    const { type: event_type, /* object: { user: { name: username, email, id: userid}, 
+        course: { name: coursename }, price } */ } = req.body;
     const currentDateTime = new Date().toISOString();
-    const columns = `event_type, name, email, userid, course, transaction_amount, insert_time, update_time`;
-    const values = `'${event_type}', '${username}', '${email}', ${userid}, '${coursename}', ${price}, '${currentDateTime}', '${currentDateTime}'`;
+    // const columns = `event_type, name, email, userid, course, transaction_amount, insert_time, update_time`;
+    const columns = `event_type`;
+    // const values = `'${event_type}', '${username}', '${email}', ${userid}, '${coursename}', ${price}, '${currentDateTime}', '${currentDateTime}'`;
+    const values = `'${event_type}'`;
     database.write(process.env.DB_TEACHABLE_SALES, columns, values, function(err, results) {
         if (err) { 
             res.send(500, 'Server Error'); 
