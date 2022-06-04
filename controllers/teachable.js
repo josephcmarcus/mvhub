@@ -40,6 +40,7 @@ module.exports.processSaleHook = (req, res) => {
     const values = `'${event_type}'`;
     database.write(process.env.DB_TEACHABLE_SALES, columns, values, function(err, results) {
         if (err) { 
+            console.log(err);
             res.send(500, 'Server Error'); 
             return; 
         }
