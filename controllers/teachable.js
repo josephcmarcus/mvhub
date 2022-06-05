@@ -34,9 +34,10 @@ module.exports.processSaleHook = (req, res) => {
     const newObj = req.body.shift();
     const { type: event_type, object: { user: { name: username, email, id: userid}, 
         course: { name: coursename }, price } } = newObj;
+    const decimalPrice = (price / 100).toFixed(2);
     const currentDateTime = new Date().toISOString();
     const columns = `event_type, name, email, userid, course, transaction_amount, insert_time, update_time`;
-    const values = `'${event_type}', '${username}', '${email}', ${userid}, '${coursename}', ${price}, '${currentDateTime}', '${currentDateTime}'`;
+    const values = `'${event_type}', '${username}', '${email}', ${userid}, '${coursename}', ${decimalPrice}, '${currentDateTime}', '${currentDateTime}'`;
     database.write(process.env.DB_TEACHABLE_SALES, columns, values, function(err, results) {
         if (err) { 
             console.log(err);
