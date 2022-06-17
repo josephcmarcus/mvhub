@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const thrivecart = require('../controllers/thrivecart');
 
-router.route('/')
-    .get(thrivecart.index)
+router.route('/sale')
+    .get(thrivecart.sale)
     .post(thrivecart.processSaleHook);
 
 router.route('/test')
