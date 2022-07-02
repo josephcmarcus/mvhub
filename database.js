@@ -38,8 +38,8 @@ module.exports.testConnection = function(numOne, numTwo) {
     });
 };
 
-module.exports.write = function(table, columns, values) {
-    const sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`
+module.exports.write = function(table, columns, valuesPrep, values) {
+    const sql = `INSERT INTO ${table} (${columns.toString()}) VALUES (${valuesPrep.toString()});`
     // get connection from pool
     pool.getConnection(function(err, connection) {
         if (err) {
@@ -47,7 +47,10 @@ module.exports.write = function(table, columns, values) {
             return;
         }
         // make query
-        connection.query(sql, function(err, results) {
+        connection.query(
+            sql, 
+            values, 
+            function(err, results) {
             connection.release();
             if (err) {
                 console.log(err);
@@ -57,6 +60,26 @@ module.exports.write = function(table, columns, values) {
         });
     });
 };
+
+// module.exports.write = function(table, columns, values) {
+//     const sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`
+//     // get connection from pool
+//     pool.getConnection(function(err, connection) {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         // make query
+//         connection.query(sql, function(err, results) {
+//             connection.release();
+//             if (err) {
+//                 console.log(err);
+//                 return;
+//             }
+//             console.log(results);
+//         });
+//     });
+// };
 
 // pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 //   if (error) throw error;

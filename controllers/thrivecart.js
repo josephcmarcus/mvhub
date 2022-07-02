@@ -40,16 +40,19 @@ module.exports.processSaleHook = (req, res) => {
             ip_address, first_name, last_name, checkbox_confirmation }, order: { processor, charges }} = req.body;
         console.log('Authorized - Sale')
         for (let i = 0; i < charges.length; i++) {
-            const columns = `event, thrivecart_account, thrivecart_secret, order_id, invoice_id, order_date,` + 
-            `order_timestamp, currency, customer_id, first_name, last_name, email, country, state, street, city,` + 
-            `zip, ip_address, checkbox_confirmation, processor, product_name, product_reference, amount, amount_str,` + 
-            `quantity, insert_time, update_time`;
-            const values = `'${event}', '${thrivecart_account}', '${thrivecart_secret}', ${order_id}, ${invoice_id},` + 
-            `'${order_date}', ${order_timestamp}, '${currency}', ${customer_id}, '${first_name}', '${last_name}', '${email}',` + 
-            `'${country}', '${state}', '${street}', '${city}', '${zip}', '${ip_address}', '${checkbox_confirmation}', '${processor}',` + 
-            `'${charges[i].name}', '${charges[i].reference}', ${charges[i].amount}, '${charges[i].amount_str}', ${charges[i].quantity},` +
-            `'${currentDateTime}', '${currentDateTime}'`;
-            database.write(process.env.DB_THRIVECART_SALES, columns, values, function(err, results) {
+            const columns = ['event', 'thrivecart_account', 'thrivecart_secret', 'order_id', 'invoice_id', 'order_date', 
+            'order_timestamp', 'currency', 'customer_id', 'first_name', 'last_name', 'email', 'country', 'state', 'street', 
+            'city', 'zip', 'ip_address', 'checkbox_confirmation', 'processor', 'product_name', 'product_reference', 'amount', 
+            'amount_str', 'quantity', 'insert_time', 'update_time'];
+            let valuesPrep = [];
+            for (colName of columns) {
+                valuesPrep.push('?')
+            };
+            const values = [event, thrivecart_account, thrivecart_secret, order_id, invoice_id, order_date, order_timestamp, 
+                currency, customer_id, first_name, last_name, email, country, state, street, city, zip, ip_address, 
+                checkbox_confirmation, processor, charges[i].name, charges[i].reference, charges[i].amount, charges[i].amount_str, 
+                charges[i].quantity, currentDateTime, currentDateTime];
+            database.write(process.env.DB_THRIVECART_SALES, columns, valuesPrep, values, function(err, results) {
                 if (err) { 
                     console.log(err);
                     res.send(500, 'Server Error'); 
