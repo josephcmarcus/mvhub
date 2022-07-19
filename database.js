@@ -57,6 +57,7 @@ module.exports.write = function(table, columns, valuesPrep, values) {
                 return;
             }
             console.log(results);
+            return;
         });
     });
 };
