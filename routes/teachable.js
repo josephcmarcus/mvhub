@@ -6,10 +6,6 @@ router.route('/sale')
     .get(teachable.sale)
     .post(teachable.processSaleHook);
 
-router.route('/join')
-    .get(teachable.join)
-    .post(teachable.processJoinHook);
-
 router.route('/test')
     .get(teachable.test);
 

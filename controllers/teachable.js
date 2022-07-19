@@ -37,7 +37,9 @@ module.exports.processSaleHook = (req, res) => {
     const decimalPrice = (price / 100).toFixed(2);
     const currentDateTime = new Date().toISOString();
     const columns = ['event_type', 'name', 'email', 'userid', 'course', 'transaction_amount', 'insert_time', 'update_time'];
-    const valuesPlaceholder = Array(columns.length).fill('?') ; // fills placeholder array with number of ?s matching length of columns array
+    
+    // fills placeholder array with number of ?s matching length of columns array
+    const valuesPlaceholder = Array(columns.length).fill('?');
     const values = [event_type, username, email, userid, coursename, decimalPrice, currentDateTime, currentDateTime]
     
     database.write(process.env.DB_TEACHABLE_SALES, columns, valuesPlaceholder, values, function(err, results) {
