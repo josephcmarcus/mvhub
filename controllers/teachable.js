@@ -36,26 +36,17 @@ module.exports.processSaleHook = (req, res) => {
         course: { name: coursename }, price } } = newObj;
     const decimalPrice = (price / 100).toFixed(2);
     const currentDateTime = new Date().toISOString();
-    const columns = `event_type, name, email, userid, course, transaction_amount, insert_time, update_time`;
-    const values = `'${event_type}', '${username}', '${email}', ${userid}, '${coursename}', ${decimalPrice}, '${currentDateTime}', '${currentDateTime}'`;
-    database.write(process.env.DB_TEACHABLE_SALES, columns, values, function(err, results) {
+    const columns = ['event_type', 'name', 'email', 'userid', 'course', 'transaction_amount', 'insert_time', 'update_time'];
+    const valuesPlaceholder = Array(columns.length).fill('?') ; // fills placeholder array with number of ?s matching length of columns array
+    const values = [event_type, username, email, userid, coursename, decimalPrice, currentDateTime, currentDateTime]
+    
+    database.write(process.env.DB_TEACHABLE_SALES, columns, valuesPlaceholder, values, function(err, results) {
         if (err) { 
             console.log(err);
             res.send(500, 'Server Error'); 
             return; 
         }
-        res.send(results);
+        console.log(results);
     });
-    res.status(201).send('Success');
-};
-
-// processes a platform join webhook
-module.exports.processJoinHook = (req, res) => {
-    const { object: { user: { name: username, email, id: userid}, course: { name: coursename }, 
-    price } } = req.body;
-    console.log(`***** Start POST at /teachable/join *****`);
-    console.log(req.body);
-    console.log(`Username: ${username} | email: ${email} | userid: ${userid} | course: ${coursename}`)
-    console.log(`***** End POST at /teachable/join *****`);
-    res.status(204, 'Success');
+    res.status(200).send('Success');
 };
