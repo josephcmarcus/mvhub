@@ -18,6 +18,7 @@ module.exports.processSaleHook = (req, res) => {
     // creates array of columns matching mysql table structure
     const columns = ['event_type', 'name', 'email', 'userid', 'course', 'transaction_amount', 'insert_time', 'update_time'];
     
+    // pushes a matching number of ? marks for the columns above into a placeholder values array for prepared statement format
     const valuesPlaceholder = Array(columns.length).fill('?');
 
     // creates array of values from newObj corresponding to columns array above

@@ -33,6 +33,8 @@ module.exports.processSaleHook = (req, res) => {
                 'checkbox_confirmation', 'processor', 'product_name', 'product_reference', 'amount',
                 'amount_str', 'sales_tax', 'total', 'net', 'quantity', 'event', 'insert_time', 'update_time'];
 
+            /* pushes a matching number of ? marks for the columns above into a placeholder values array for 
+            prepared statement format */
             const valuesPlaceholderSales = Array(columnsSales.length).fill('?');
 
             // creates array of values from req.body corresponding to columns array above
