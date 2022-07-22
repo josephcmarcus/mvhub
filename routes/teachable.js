@@ -6,7 +6,4 @@ router.route('/sale')
     .get(teachable.sale)
     .post(teachable.processSaleHook);
 
-router.route('/test')
-    .get(teachable.test);
-
 module.exports = router;

@@ -61,29 +61,3 @@ module.exports.write = function(table, columns, valuesPrep, values) {
         });
     });
 };
-
-// module.exports.write = function(table, columns, values) {
-//     const sql = `INSERT INTO ${table} (${columns}) VALUES (${values});`
-//     // get connection from pool
-//     pool.getConnection(function(err, connection) {
-//         if (err) {
-//             console.log(err);
-//             return;
-//         }
-//         // make query
-//         connection.query(sql, function(err, results) {
-//             connection.release();
-//             if (err) {
-//                 console.log(err);
-//                 return;
-//             }
-//             console.log(results);
-//         });
-//     });
-// };
-
-// pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log(results.length);
-//   console.log('The solution is: ', results[0].solution);
-// });

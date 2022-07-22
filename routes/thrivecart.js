@@ -6,7 +6,4 @@ router.route('/sale')
     .get(thrivecart.sale)
     .post(thrivecart.processSaleHook);
 
-router.route('/test')
-    .get(thrivecart.test);
-
 module.exports = router;
