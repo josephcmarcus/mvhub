@@ -16,8 +16,8 @@ module.exports.processSaleHook = (req, res) => {
     } else if (req.body.event != 'order.success') { // checks and validates the event type of the webhook
         res.status(401).send('Unauthorized - Not a Sale');
     } else {
-        const { thrivecart_account, order_id, invoice_id, order_date, order_timestamp, currency,
-            customer_id, customer: { email, address: { country, state, line1: street, city, zip },
+        const { thrivecart_account, thrivecart_secret, order_id, invoice_id, order_date, order_timestamp, 
+            currency, customer_id, customer: { email, address: { country, state, line1: street, city, zip },
             ip_address, first_name, last_name, checkbox_confirmation }, order: { processor, charges },
             transactions } = req.body;
         const source = 'school';
