@@ -45,11 +45,11 @@ module.exports.processSaleHook = (req, res) => {
                 total, charges[i].amount_str, charges[i].quantity, event, currentDateTime, currentDateTime];
 
             const transactionsArray = Object.values(transactions);
-            const columnsTransactionId = ['email', 'ip_address', 'net', 'transaction_id', 'insert_time',
+            const columnsTransactionId = ['email', 'ip_address', 'net', 'product_name', 'transaction_id', 'insert_time',
                 'update_time']
 
             const valuesPlaceholderTransactionId = Array(columnsTransactionId.length).fill('?');
-            const valuesTransactionId = [email, ip_address, charges[i].amount_str, transactionsArray[i],
+            const valuesTransactionId = [email, ip_address, charges[i].amount_str, product_name, transactionsArray[i],
                 currentDateTime, currentDateTime];
 
             // writes columnsSales and valuesSales arrays to sales table in mysql db
