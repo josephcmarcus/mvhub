@@ -4,3 +4,4 @@ test.js
 test.json
 .DS_Store
 DigiCertGlobalRootCA.crt.pem
+.env
