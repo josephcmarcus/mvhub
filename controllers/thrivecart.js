@@ -1,4 +1,5 @@
 const database = require('../database');
+const { mailchimp } = require('../utils/microservicehandler');
 
 module.exports.sale = (req, res) => {
     console.log('hit on /thrivecart/sale');
@@ -73,7 +74,11 @@ module.exports.processSaleHook = (req, res) => {
                     }
                     console.log(results);
                 });
+            
+            // passes product name and email to Mailchimp add tag handler
+            mailchimp.addTag(charges[i].name, email);
         };
+
         res.status(200).send('Success');
     };
 };
