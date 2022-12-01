@@ -7,12 +7,10 @@ This small application parses incoming sale webhooks from Thrivecart and Teachab
 
     - Thrivecart also sends webhooks with a unique secret that allows you to validate hooks before ingesting them into your database, hence the inclusion of TC_SECRET in the placeholder .env file.
 
-2. If desired, you can modify the routes you want Teachable and Thrivecart to send webhooks to under the routes folder within the teachable.js and thrivecart.js files.
+2. Rename ".env_placeholder" to ".env"
 
-3. The teachable.js and thrivecart.js files under the controllers folder are where you'll setup the columns matching your MySQL table structure and pull corresponding values from the webhook request body.
-    - The SQL syntax leverages the prepared statement feature for efficiency and security purposes.
+3. If desired, you can modify the routes you want Teachable and Thrivecart to send webhooks to under the routes folder within the teachable.js and thrivecart.js files.
 
-    - Since Thrivecart sends several different types of webhooks (sale, abandoned cart, etc...) and this application is only concerned with writing sale data, a check is run against the request body to make sure the event is 'order.success'. If it is not 'order.success', the request is refused. 
-        - This is not necessary for Teachable since you can toggle which specific webhook types you want sent to your application from their platform.
+4. The teachable.js and thrivecart.js files under the controllers folder are where you'll setup the columns matching your MySQL table structure and pull corresponding values from the webhook request body.
 
-4. After deploying your application, you will go to the webhook setup portal on Thrivecart and Teachable and specify the URLs to which they should send webhooks. These URLs should match what you specify in the routes folder files.
+5. After deploying your application, you will go to the webhook setup portal on Thrivecart and Teachable and specify the URLs to which they should send webhooks. These URLs should match what you specify in the routes folder files.
