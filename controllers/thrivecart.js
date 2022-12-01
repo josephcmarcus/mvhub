@@ -75,7 +75,7 @@ module.exports.processSaleHook = (req, res) => {
                     console.log(results);
                 });
             
-            // passes product name and email to Mailchimp add tag handler
+            // passes product name and email to the Mailchimp add tag handler
             mailchimp.addTag(charges[i].name, email);
         };
 
